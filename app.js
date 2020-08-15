@@ -28,23 +28,52 @@ const fruit = new Fruit({
 });
 
 //fruit.save();
-//end fruit
+//end fruit Schema
 
 //New person Schema
 const personSchema = new mongoose.Schema({
   name: String,
-  age: Number
+  age: Number,
+  favoriteFruit: fruitSchema
 });
 
 const Person = mongoose.model("Person", personSchema);
+//End new person Schema
 
-const person = new Person({
-  name: "John",
-  age: 37
+//start Pineapple
+const pineapple = new Fruit({
+  name: "Pineapple",
+  score: 9,
+  review: "Great fruit."
 });
+// //pineapple.save();
+//end Pineapple
 
-//person.save();
-//end person
+//start Amy
+// const person = new Person({
+//   name: "Amy",
+//   age: 18,
+//   favoriteFruit: pineapple
+// });
+//End Amy
+
+//start Plum
+const plum = new Fruit({
+  name: "Plum",
+  score: 10,
+  review: "Good Stuff."
+});
+// plum.save();
+//End Plum
+
+//Start John
+// const person = new Person({
+//   name: "John",
+//   age: 37,
+//   favoriteFruit: plum
+// });
+// person.save();
+//End John
 
 //no longer in use, commented out for reference
 //add more than one fruit to database at one time
@@ -97,17 +126,34 @@ Fruit.find(function(err, fruits){
 //     console.log("Successfully updated the document.");
 //   }
 // });
+
+//How to change John's favroite fruit through update method (I changed it above instead)
+Person.updateOne({name: "John"}, {favoriteFruit: plum}, function(err){
+  if(err){
+    console.log(err);
+  }else{
+    console.log("Successfully updated the document");
+  }
+});
 //End Update Method
 
-//Delete method
-// Fruit.deleteOne({ _id: "5f372fac1ef4b343f0b3ae00"}, function (err) {
+// Delete method
+// Fruit.deleteOne({ _id: "5f3754a085c65f2a94524593"}, function (err) {
 //   if(err){
 //     console.log(err);
 //   } else{
 //     console.log("Successfully deleted");
 //   }
 // });
-//End Delete method
+
+// Person.deleteOne({ _id: "5f37519df51f790444d737a3"}, function (err) {
+//   if(err){
+//     console.log(err);
+//   } else{
+//     console.log("Successfully deleted");
+//   }
+// });
+// End Delete method
 
 //deleteMany Method
 // Person.deleteMany({ name: "John"}, function (err) {
